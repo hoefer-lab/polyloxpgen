@@ -70,20 +70,20 @@ def get_pre_data(df_in):
     return pre_barcodes, pre_reads, sample_names
 
 def load_libraries(path_matrix_type='uniform'):
-    with zipfile.ZipFile('./data/polylox_barcodelib.txt.zip') as z:
+    with zipfile.ZipFile('../data/polylox_barcodelib.txt.zip') as z:
         with z.open('polylox_barcodelib.txt', 'r') as f:
             barcodelib = np.loadtxt(f, dtype=str) # [l.decode('utf-8').replace('\n', '') for l in f.readlines()]
 
-    with zipfile.ZipFile('./data/polylox_minrecs.txt.zip') as z:
+    with zipfile.ZipFile('../data/polylox_minrecs.txt.zip') as z:
         with z.open('polylox_minrecs.txt', 'r') as f:
             minrecs = np.loadtxt(f, dtype=int) # [int(l.decode('utf-8').replace('\n', '')) for l in f.readlines()]
 
     if path_matrix_type=='uniform':
-        with zipfile.ZipFile('./data/polylox_path_matrix_uniform.txt.zip') as z:
+        with zipfile.ZipFile('../data/polylox_path_matrix_uniform.txt.zip') as z:
             with z.open('polylox_path_matrix_uniform.txt', 'r') as f:
                 path_matrix = np.loadtxt(f, delimiter=',')
     elif path_matrix_type=='ld_2017':
-        with zipfile.ZipFile('./data/polylox_path_matrix_ld_2017_reorder.txt.zip') as z:
+        with zipfile.ZipFile('../data/polylox_path_matrix_ld_2017_reorder.txt.zip') as z:
             with z.open('polylox_path_matrix_ld_2017_reorder.txt', 'r') as f:
                 path_matrix = np.loadtxt(f, delimiter=',')
 

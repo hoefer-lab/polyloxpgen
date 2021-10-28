@@ -8,10 +8,11 @@ __author__ = 'Maurice Langhinrichs <m.langhinrichs@icloud.com>'
 __all__ = ['merge', 'pgen']
 
 # to be able to use "import polyloxpgen" and "polyloxpgen.polylox_merge()":
-import merge
-import pgen
-import merge.polylox_merge
-import pgen.polylox_pgen
-
-# from .merge import polylox_merge
-# from .pgen import polylox_pgen
+# NOTE: this does not seem to work currently...
+# but using separate imports works: import polyloxpgen.merge, etc. 
+from .merge import polylox_merge
+from .pgen import polylox_pgen
+# import merge
+# import pgen
+# import merge.polylox_merge
+# import pgen.polylox_pgen
