@@ -1,3 +1,17 @@
+
+.. image:: https://img.shields.io/pypi/v/polyloxpgen.svg
+    :target: https://pypi.python.org/pypi/polyloxpgen
+    :alt: Latest PyPI version
+
+.. image:: https://travis-ci.com/mauricelanghinrichs/polyloxpgen.svg?branch=master
+   :target: https://travis-ci.com/mauricelanghinrichs/polyloxpgen
+   :alt: Latest Travis CI build status
+
+.. image:: https://codecov.io/gh/mauricelanghinrichs/polyloxpgen/branch/master/graph/badge.svg?token=MUWGE04ERH
+   :target: https://codecov.io/gh/mauricelanghinrichs/polyloxpgen
+
+TODO: adapt badges to polyloxpgen
+
 ## polyloxpgen
 
 Barcode purging and pgen (probability of generation) calculation for Polylox data.
@@ -16,10 +30,10 @@ to use polyloxpgen and the above methods, install it via
 pip install polyloxpgen
 ```
 
-#### ***Docs/Workflow example***
+#### ***Docs / Workflow example***
 
 please visit the example.ipynb jupyter notebook for a workflow example and some
-further notes
+further notes (in the examples folder)
 
 #### ***References / Final notes***
 
