@@ -31,6 +31,7 @@ polyloxpgen contains two main methods
 
 to use polyloxpgen and the above methods, install it via
 
+.. code-block::
    pip install polyloxpgen
 
 
