@@ -13,9 +13,8 @@ install:
   - pip install pytest-cov codecov
 
 # command to run tests
-# --runslow is to run all tests
 script:
-  - pytest --cov=polyloxpgen
+  - python -m pytest --cov=polyloxpgen
 
 # this automatically reports to codecov,
 # which create their README badge
