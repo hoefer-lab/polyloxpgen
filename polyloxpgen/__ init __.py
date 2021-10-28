@@ -9,7 +9,7 @@ __all__ = ['merge', 'pgen']
 
 # to be able to use "import polyloxpgen" and "polyloxpgen.polylox_merge()":
 # NOTE: this does not seem to work currently...
-# but using separate imports works: import polyloxpgen.merge, etc. 
+# but using separate imports works: import polyloxpgen.merge, etc.
 from .merge import polylox_merge
 from .pgen import polylox_pgen
 # import merge
