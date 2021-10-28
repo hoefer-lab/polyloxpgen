@@ -14,7 +14,7 @@ setup(
       include_package_data=True,
       packages=find_packages(exclude=('tests',)),
 
-      install_requires=['numpy>=1.16.0', 'pandas>=1.1.0'],
+      install_requires=['numpy>=1.17.3', 'pandas>=1.1.0'],
 
       test_suite='tests',
       setup_requires=['pytest-runner'],
