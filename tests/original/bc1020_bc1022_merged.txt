@@ -1,4 +1,4 @@
-Barcode	Sample1	Sample2
+Barcode	bc1020	bc1022
 123456789	33813	38072
 1	88	47
 GFE	0	93
