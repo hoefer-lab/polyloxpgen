@@ -9,29 +9,29 @@ import pandas as pd
 import os
 
 def test_single_sample_output_bc1020_ld2017():
-    ref_file = './original/bc1020_BarPipe.txt'
+    ref_file = './tests/original/bc1020_BarPipe.txt'
     purged_barcodes_ref = np.loadtxt(ref_file, usecols=0, skiprows=1, delimiter='\t', dtype=str)
     purged_reads_ref = np.loadtxt(ref_file, usecols=1, skiprows=1, delimiter='\t')
     data_minrecs_ref = np.loadtxt(ref_file, usecols=3, skiprows=1, delimiter='\t', dtype=int)
     data_pgen_ref = np.loadtxt(ref_file, usecols=4, skiprows=1, delimiter='\t')
 
     # run polylox_merge
-    df_merged = polyloxpgen.merge.polylox_merge(['./original/bc1020.barcode.count.txt'],
+    df_merged = polyloxpgen.merge.polylox_merge(['./tests/original/bc1020.barcode.count.txt'],
                                     ['bc1020'], './temp/', 'bc1020_merged')
 
     # run polylox_pgen
-    df_pgen = polyloxpgen.pgen.polylox_pgen('./temp/bc1020_merged.txt',
+    df_pgen = polyloxpgen.pgen.polylox_pgen('./tests/temp/bc1020_merged.txt',
                                         './temp/', 'bc1020_pgen',
                                         path_matrix_type='ld_2017')
 
     # read back from resulted file (corresponds to df_pgen)
-    df_res = pd.read_csv('./temp/bc1020_pgen.txt', sep='\t', index_col=0)
+    df_res = pd.read_csv('./tests/temp/bc1020_pgen.txt', sep='\t', index_col=0)
 
     # delete temporary files in the end
-    if os.path.isfile('./temp/bc1020_merged.txt'):
-        os.remove('./temp/bc1020_merged.txt')
+    if os.path.isfile('./tests/temp/bc1020_merged.txt'):
+        os.remove('./tests/temp/bc1020_merged.txt')
     if os.path.isfile('./temp/bc1020_pgen.txt'):
-        os.remove('./temp/bc1020_pgen.txt')
+        os.remove('./tests/temp/bc1020_pgen.txt')
 
     # check if the same set of barcodes comes out
     assert set(purged_barcodes_ref)==set(df_res.index.to_numpy(dtype=str))
