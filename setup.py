@@ -11,6 +11,11 @@ setup(
       author_email='m.langhinrichs@icloud.de',
       license='MIT',
 
+      # README is rst currently, switch to md / markdown for pypi:
+      # long_description_content_type="text/markdown"
+      long_description_content_type="text/x-rst",
+      long_description="Please visit polyloxpgen on `GitHub <https://github.com/mauricelanghinrichs/polyloxpgen>`_.",
+
       include_package_data=True,
       packages=find_packages(exclude=('tests',)),
 
