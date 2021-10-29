@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 setup(
       name='polyloxpgen',
-      version='0.1.1',
+      version='0.1.2',
       description='Barcode purging and pgen (probability of generation) calculation for Polylox data.',
       url='https://github.com/mauricelanghinrichs/polyloxpgen',
       author='Maurice Langhinrichs',
