@@ -3,11 +3,11 @@
     :target: https://pypi.python.org/pypi/polyloxpgen
     :alt: Latest PyPI version
 
-.. image:: https://travis-ci.com/mauricelanghinrichs/polyloxpgen.svg?branch=master
-   :target: https://travis-ci.com/mauricelanghinrichs/polyloxpgen
-   :alt: Latest Travis CI build status
+.. image:: https://app.travis-ci.com/mauricelanghinrichs/polyloxpgen.svg?token=zRJmT5qRrqzz4CJ34VxZ&branch=main
+   :target: https://app.travis-ci.com/mauricelanghinrichs/polyloxpgen
 
-.. image:: https://codecov.io/gh/mauricelanghinrichs/polyloxpgen/branch/master/graph/badge.svg?token=MUWGE04ERH
+
+.. image:: https://codecov.io/gh/mauricelanghinrichs/polyloxpgen/branch/main/graph/badge.svg?token=MUWGE04ERH
    :target: https://codecov.io/gh/mauricelanghinrichs/polyloxpgen
 
 
