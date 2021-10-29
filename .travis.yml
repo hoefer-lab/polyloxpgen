@@ -1,6 +1,7 @@
 language: python
 os:
   - linux
+  - windows
   # - osx # currently not supported by travis..., add another time again
 python:
   - "3.6"      # current default Python on Travis CI

@@ -10,7 +10,6 @@
 .. image:: https://codecov.io/gh/mauricelanghinrichs/polyloxpgen/branch/master/graph/badge.svg?token=MUWGE04ERH
    :target: https://codecov.io/gh/mauricelanghinrichs/polyloxpgen
 
-TODO: adapt badges to polyloxpgen
 
 polyloxpgen
 ^^^^^^^^^^^
@@ -32,7 +31,7 @@ polyloxpgen contains two main methods
 to use polyloxpgen and the above methods, install it via
 
 .. code-block::
-   
+
    pip install polyloxpgen
 
 
