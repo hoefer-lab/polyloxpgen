@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 setup(
       name='polyloxpgen',
-      version='0.1.2',
+      version='0.1.3',
       description='Barcode purging and pgen (probability of generation) calculation for Polylox data.',
       url='https://github.com/mauricelanghinrichs/polyloxpgen',
       author='Maurice Langhinrichs',
@@ -17,10 +17,10 @@ setup(
       long_description="Please visit polyloxpgen on `GitHub <https://github.com/mauricelanghinrichs/polyloxpgen>`_.",
 
       include_package_data=True,
-      packages=find_packages(exclude=('tests',)),
+      packages=find_packages(exclude=('tests', 'tests.original', 'tests.temp')),
 
       # to include the polylox libraries explicitly in builds/distributions/releases
-      package_data = {'': ['*.zip']},
+      # package_data = {'data': ['*.zip']},
 
       install_requires=['numpy>=1.17.3', 'pandas>=1.1.0'],
 
