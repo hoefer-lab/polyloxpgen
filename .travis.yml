@@ -16,7 +16,7 @@ install:
 
 # command to run tests
 script:
-  - pytest --cov=polyloxpgen
+  - python -m pytest --cov=polyloxpgen
 
 # this automatically reports to codecov,
 # which create their README badge
