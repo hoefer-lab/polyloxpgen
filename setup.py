@@ -19,6 +19,9 @@ setup(
       include_package_data=True,
       packages=find_packages(exclude=('tests',)),
 
+      # to include the polylox libraries explicitly in builds/distributions/releases
+      package_data = {'': ['*.zip']},
+
       install_requires=['numpy>=1.17.3', 'pandas>=1.1.0'],
 
       test_suite='tests',
