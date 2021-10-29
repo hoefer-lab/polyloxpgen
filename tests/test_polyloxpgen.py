@@ -1,39 +1,42 @@
 
 ### this requires pip install pytest
-### if installed, run >>> pytest within the /tests directory
+### if installed, run >>> pytest within the /tests or /polyloxpgen (package) directory
 
 import polyloxpgen.merge
 import polyloxpgen.pgen
 import numpy as np
 import pandas as pd
 import os
+import time
 
 def test_single_sample_output_bc1020_ld2017():
     floc = os.path.join(os.path.dirname(__file__), '')
 
-    ref_file = floc + 'original/bc1020_BarPipe.txt'
+    ref_file = os.path.join(floc, 'original', 'bc1020_BarPipe.txt')
     purged_barcodes_ref = np.loadtxt(ref_file, usecols=0, skiprows=1, delimiter='\t', dtype=str)
     purged_reads_ref = np.loadtxt(ref_file, usecols=1, skiprows=1, delimiter='\t')
     data_minrecs_ref = np.loadtxt(ref_file, usecols=3, skiprows=1, delimiter='\t', dtype=int)
     data_pgen_ref = np.loadtxt(ref_file, usecols=4, skiprows=1, delimiter='\t')
 
     # run polylox_merge
-    df_merged = polyloxpgen.merge.polylox_merge([floc + 'original/bc1020.barcode.count.txt'],
-                                    ['bc1020'], floc + 'temp/', 'bc1020_merged')
+    df_merged = polyloxpgen.merge.polylox_merge([os.path.join(floc, 'original', 'bc1020.barcode.count.txt')],
+                                    ['bc1020'], os.path.join(floc, 'temp'), 'bc1020_merged')
 
     # run polylox_pgen
-    df_pgen = polyloxpgen.pgen.polylox_pgen(floc + 'temp/bc1020_merged.txt',
-                                        floc + 'temp/', 'bc1020_pgen',
+    df_pgen = polyloxpgen.pgen.polylox_pgen(os.path.join(floc, 'temp', 'bc1020_merged.txt'),
+                                        os.path.join(floc, 'temp'),
+                                        'bc1020_pgen',
                                         path_matrix_type='ld_2017')
 
     # read back from resulted file (corresponds to df_pgen)
-    df_res = pd.read_csv(floc + 'temp/bc1020_pgen.txt', sep='\t', index_col=0)
+    df_res = pd.read_csv(os.path.join(floc, 'temp', 'bc1020_pgen.txt'), sep='\t', index_col=0)
 
     # delete temporary files in the end
-    if os.path.isfile(floc + 'temp/bc1020_merged.txt'):
-        os.remove(floc + 'temp/bc1020_merged.txt')
-    if os.path.isfile(floc + 'temp/bc1020_pgen.txt'):
-        os.remove(floc + 'temp/bc1020_pgen.txt')
+    time.sleep(1.0)
+    if os.path.isfile(os.path.join(floc, 'temp', 'bc1020_merged.txt')):
+        os.remove(os.path.join(floc, 'temp', 'bc1020_merged.txt'))
+    if os.path.isfile(os.path.join(floc, 'temp', 'bc1020_pgen.txt')):
+        os.remove(os.path.join(floc, 'temp', 'bc1020_pgen.txt'))
 
     # check if the same set of barcodes comes out
     assert set(purged_barcodes_ref)==set(df_res.index.to_numpy(dtype=str))
@@ -50,28 +53,31 @@ def test_single_sample_output_bc1020_ld2017():
 def test_single_sample_output_bc1022_ld2017():
     floc = os.path.join(os.path.dirname(__file__), '')
 
-    purged_barcodes_ref = np.loadtxt(floc + 'original/bc1022_BarPipe.txt', usecols=0, skiprows=1, delimiter='\t', dtype=str)
-    purged_reads_ref = np.loadtxt(floc + 'original/bc1022_BarPipe.txt', usecols=1, skiprows=1, delimiter='\t')
-    data_minrecs_ref = np.loadtxt(floc + 'original/bc1022_BarPipe.txt', usecols=3, skiprows=1, delimiter='\t', dtype=int)
-    data_pgen_ref = np.loadtxt(floc + 'original/bc1022_BarPipe.txt', usecols=4, skiprows=1, delimiter='\t')
+    ref_file = os.path.join(floc, 'original', 'bc1022_BarPipe.txt')
+    purged_barcodes_ref = np.loadtxt(ref_file, usecols=0, skiprows=1, delimiter='\t', dtype=str)
+    purged_reads_ref = np.loadtxt(ref_file, usecols=1, skiprows=1, delimiter='\t')
+    data_minrecs_ref = np.loadtxt(ref_file, usecols=3, skiprows=1, delimiter='\t', dtype=int)
+    data_pgen_ref = np.loadtxt(ref_file, usecols=4, skiprows=1, delimiter='\t')
 
     # run polylox_merge
-    df_merged = polyloxpgen.merge.polylox_merge([floc + 'original/bc1022.barcode.count.txt'],
-                                    ['bc1022'], floc + 'temp/', 'bc1022_merged')
+    df_merged = polyloxpgen.merge.polylox_merge([os.path.join(floc, 'original', 'bc1022.barcode.count.txt')],
+                                    ['bc1022'], os.path.join(floc, 'temp'), 'bc1022_merged')
 
     # run polylox_pgen
-    df_pgen = polyloxpgen.pgen.polylox_pgen(floc + 'temp/bc1022_merged.txt',
-                                        floc + 'temp/', 'bc1022_pgen',
+    df_pgen = polyloxpgen.pgen.polylox_pgen(os.path.join(floc, 'temp', 'bc1022_merged.txt'),
+                                        os.path.join(floc, 'temp'),
+                                        'bc1022_pgen',
                                         path_matrix_type='ld_2017')
 
     # read back from resulted file (corresponds to df_pgen)
-    df_res = pd.read_csv(floc + 'temp/bc1022_pgen.txt', sep='\t', index_col=0)
+    df_res = pd.read_csv(os.path.join(floc, 'temp', 'bc1022_pgen.txt'), sep='\t', index_col=0)
 
     # delete temporary files in the end
-    if os.path.isfile(floc + 'temp/bc1022_merged.txt'):
-        os.remove(floc + 'temp/bc1022_merged.txt')
-    if os.path.isfile(floc + 'temp/bc1022_pgen.txt'):
-        os.remove(floc + 'temp/bc1022_pgen.txt')
+    time.sleep(1.0)
+    if os.path.isfile(os.path.join(floc, 'temp', 'bc1022_merged.txt')):
+        os.remove(os.path.join(floc, 'temp', 'bc1022_merged.txt'))
+    if os.path.isfile(os.path.join(floc, 'temp', 'bc1022_pgen.txt')):
+        os.remove(os.path.join(floc, 'temp', 'bc1022_pgen.txt'))
 
     # check if the same set of barcodes comes out
     assert set(purged_barcodes_ref)==set(df_res.index.to_numpy(dtype=str))
@@ -89,28 +95,29 @@ def test_two_sample_output_bc1020_bc1022_uniform():
     floc = os.path.join(os.path.dirname(__file__), '')
 
     # load reference dataframes
-    df_merged_ref = pd.read_csv(floc + 'original/bc1020_bc1022_merged.txt', sep='\t', index_col=0)
-    df_pgen_ref = pd.read_csv(floc + 'original/bc1020_bc1022_pgen_uniform.txt', sep='\t', index_col=0)
+    df_merged_ref = pd.read_csv(os.path.join(floc, 'original', 'bc1020_bc1022_merged.txt'), sep='\t', index_col=0)
+    df_pgen_ref = pd.read_csv(os.path.join(floc, 'original', 'bc1020_bc1022_pgen_uniform.txt'), sep='\t', index_col=0)
 
     # run polylox_merge
-    df_merged = polyloxpgen.merge.polylox_merge([floc + 'original/bc1020.barcode.count.txt',
-                                                floc + 'original/bc1022.barcode.count.txt'],
-                                    ['bc1020', 'bc1022'], floc + 'temp/', 'bc1020_bc1022_merged')
+    df_merged = polyloxpgen.merge.polylox_merge([os.path.join(floc, 'original', 'bc1020.barcode.count.txt'),
+                                                os.path.join(floc, 'original', 'bc1022.barcode.count.txt')],
+                                    ['bc1020', 'bc1022'], os.path.join(floc, 'temp'), 'bc1020_bc1022_merged')
 
     # run polylox_pgen
-    df_pgen = polyloxpgen.pgen.polylox_pgen(floc + 'temp/bc1020_bc1022_merged.txt',
-                                        floc + 'temp/', 'bc1020_bc1022_pgen',
+    df_pgen = polyloxpgen.pgen.polylox_pgen(os.path.join(floc, 'temp', 'bc1020_bc1022_merged.txt'),
+                                        os.path.join(floc, 'temp'), 'bc1020_bc1022_pgen',
                                         path_matrix_type='uniform')
 
     # read back from resulted files (correspond to df_merged and df_pgen)
-    df_merged_res = pd.read_csv(floc + 'temp/bc1020_bc1022_merged.txt', sep='\t', index_col=0)
-    df_pgen_res = pd.read_csv(floc + 'temp/bc1020_bc1022_pgen.txt', sep='\t', index_col=0)
+    df_merged_res = pd.read_csv(os.path.join(floc, 'temp', 'bc1020_bc1022_merged.txt'), sep='\t', index_col=0)
+    df_pgen_res = pd.read_csv(os.path.join(floc, 'temp', 'bc1020_bc1022_pgen.txt'), sep='\t', index_col=0)
 
     # delete temporary files in the end
-    if os.path.isfile(floc + 'temp/bc1020_bc1022_merged.txt'):
-        os.remove(floc + 'temp/bc1020_bc1022_merged.txt')
-    if os.path.isfile(floc + 'temp/bc1020_bc1022_pgen.txt'):
-        os.remove(floc + 'temp/bc1020_bc1022_pgen.txt')
+    time.sleep(1.0)
+    if os.path.isfile(os.path.join(floc, 'temp', 'bc1020_bc1022_merged.txt')):
+        os.remove(os.path.join(floc, 'temp', 'bc1020_bc1022_merged.txt'))
+    if os.path.isfile(os.path.join(floc, 'temp', 'bc1020_bc1022_pgen.txt')):
+        os.remove(os.path.join(floc, 'temp', 'bc1020_bc1022_pgen.txt'))
 
     # compare merge dataframes
     assert np.all(df_merged_ref.index.to_numpy(dtype=str)==df_merged_res.index.to_numpy(dtype=str))

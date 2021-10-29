@@ -1,6 +1,7 @@
 
 import numpy as np
 import pandas as pd
+import os
 from pathlib import Path
 
 def polylox_merge(location_files_in, sample_names, location_dir_out, file_name_out):
@@ -17,7 +18,7 @@ def polylox_merge(location_files_in, sample_names, location_dir_out, file_name_o
     df = collect_files(location_files_in, sample_names)
 
     # save dataframe as tab-separated values file (TSV, as .txt)
-    df.to_csv(location_dir_out + file_name_out + '.txt', sep='\t')
+    df.to_csv(os.path.join(location_dir_out, file_name_out + '.txt'), sep='\t')
 
     print('Done')
     return df

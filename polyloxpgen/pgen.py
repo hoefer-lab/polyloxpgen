@@ -51,7 +51,7 @@ def polylox_pgen(location_file_in, pgen_location_dir_out, pgen_file_name_out,
                             quote_marks_samples=quote_marks_samples)
 
     # save dataframe as tab-separated values file (TSV, as .txt)
-    df_pgen.to_csv(pgen_location_dir_out + pgen_file_name_out + '.txt', sep='\t',
+    df_pgen.to_csv(os.path.join(pgen_location_dir_out, pgen_file_name_out + '.txt'), sep='\t',
                         decimal=decimal_float)
     print('Done')
 
@@ -71,22 +71,23 @@ def get_pre_data(df_in):
     return pre_barcodes, pre_reads, sample_names
 
 def load_libraries(path_matrix_type='uniform'):
-    floc = os.path.dirname(os.path.abspath(__file__))
+    # os-independent path to data files; os.pardir goes one dir up ('..' on macOS)
+    floc = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, 'data')
 
-    with zipfile.ZipFile(floc + '/../data/polylox_barcodelib.txt.zip') as z:
+    with zipfile.ZipFile(os.path.join(floc, 'polylox_barcodelib.txt.zip')) as z:
         with z.open('polylox_barcodelib.txt', 'r') as f:
             barcodelib = np.loadtxt(f, dtype=str) # [l.decode('utf-8').replace('\n', '') for l in f.readlines()]
 
-    with zipfile.ZipFile(floc + '/../data/polylox_minrecs.txt.zip') as z:
+    with zipfile.ZipFile(os.path.join(floc, 'polylox_minrecs.txt.zip')) as z:
         with z.open('polylox_minrecs.txt', 'r') as f:
             minrecs = np.loadtxt(f, dtype=int) # [int(l.decode('utf-8').replace('\n', '')) for l in f.readlines()]
 
     if path_matrix_type=='uniform':
-        with zipfile.ZipFile(floc + '/../data/polylox_path_matrix_uniform.txt.zip') as z:
+        with zipfile.ZipFile(os.path.join(floc, 'polylox_path_matrix_uniform.txt.zip')) as z:
             with z.open('polylox_path_matrix_uniform.txt', 'r') as f:
                 path_matrix = np.loadtxt(f, delimiter=',')
     elif path_matrix_type=='ld_2017':
-        with zipfile.ZipFile(floc + '/../data/polylox_path_matrix_ld_2017_reorder.txt.zip') as z:
+        with zipfile.ZipFile(os.path.join(floc, 'polylox_path_matrix_ld_2017_reorder.txt.zip')) as z:
             with z.open('polylox_path_matrix_ld_2017_reorder.txt', 'r') as f:
                 path_matrix = np.loadtxt(f, delimiter=',')
 
@@ -98,7 +99,7 @@ def purge(pre_barcodes, pre_reads, barcodelib):
 
     # first filter
     # boolean array indicates for each element in data_barcodes
-    # if it is in barcodelib; also removes 'total' and 'intact'
+    # if it is in barcodelib; also removes 'total' and 'intact' if still present
     isinlib = np.isin(pre_barcodes, barcodelib)
 
     # second filter
