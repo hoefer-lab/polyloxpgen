@@ -1,7 +1,7 @@
 
 """polyloxpgen - Barcode purging and pgen (probability of generation) calculation for Polylox data."""
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 __author__ = 'Maurice Langhinrichs <m.langhinrichs@icloud.com>'
 
 # __all__ applies to importing with "from polyloxpgen import *"
