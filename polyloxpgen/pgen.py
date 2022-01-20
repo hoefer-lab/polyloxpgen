@@ -8,8 +8,6 @@ from .merge import create_outdir
 
 def polylox_pgen(location_file_in, pgen_location_dir_out, pgen_file_name_out,
                                 path_matrix_type='uniform',
-                                quote_marks_barcodes=False,
-                                quote_marks_samples=False,
                                 decimal_float='.'):
 
     print('Loading input data ... ', end='', flush=True)
@@ -46,9 +44,7 @@ def polylox_pgen(location_file_in, pgen_location_dir_out, pgen_file_name_out,
     create_outdir(pgen_location_dir_out)
 
     df_pgen = create_df_pgen(sample_names, purged_barcodes, purged_reads,
-                            data_minrecs, data_pgens,
-                            quote_marks_barcodes=quote_marks_barcodes,
-                            quote_marks_samples=quote_marks_samples)
+                            data_minrecs, data_pgens)
 
     # save dataframe as tab-separated values file (TSV, as .txt)
     df_pgen.to_csv(os.path.join(pgen_location_dir_out, pgen_file_name_out + '.txt'), sep='\t',
@@ -77,6 +73,8 @@ def load_libraries(path_matrix_type='uniform'):
     with zipfile.ZipFile(os.path.join(floc, 'polylox_barcodelib.txt.zip')) as z:
         with z.open('polylox_barcodelib.txt', 'r') as f:
             barcodelib = np.loadtxt(f, dtype=str) # [l.decode('utf-8').replace('\n', '') for l in f.readlines()]
+            # we add the '' quotes for protecting barcodes (default RPBPBR output)
+            barcodelib = np.array(["'" + bc + "'" for bc in barcodelib])
 
     with zipfile.ZipFile(os.path.join(floc, 'polylox_minrecs.txt.zip')) as z:
         with z.open('polylox_minrecs.txt', 'r') as f:
@@ -157,15 +155,7 @@ def compute_pgens(purged_barcodes, minrec_distr, barcodelib, path_matrix):
     return data_pgens
 
 def create_df_pgen(sample_names, purged_barcodes, purged_reads,
-                        data_minrecs, data_pgens,
-                        quote_marks_barcodes=False, quote_marks_samples=False):
-
-    # if quote_marks option is chosen, surround barcodes and
-    # sample_names with an additional mark ''
-    if quote_marks_samples:
-        sample_names = np.array([f'\'{name}\'' for name in sample_names])
-    if quote_marks_barcodes:
-        purged_barcodes = np.array([f'\'{bc}\'' for bc in purged_barcodes])
+                        data_minrecs, data_pgens):
 
     # create a pandas dataframe with barcodes (as index column)
     # minimal rec, pgen, and all samples (in this order)
