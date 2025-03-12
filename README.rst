@@ -21,7 +21,7 @@ Barcode purging and pgen (probability of generation) calculation for Polylox dat
 
 polyloxpgen contains two main methods
 
-- polylox_merge: merge samples from multiple raw barcode files (`RPBPBR <https://github.com/hoefer-lab/RPBPBR>`_ output)
+- polylox_merge: merge samples from multiple raw barcode files (`RPBPBR <https://github.com/sunlightwang/RPBPBR>`_ output)
 
 - polylox_pgen: purge barcodes and compute pgen for single or multiple samples
 
